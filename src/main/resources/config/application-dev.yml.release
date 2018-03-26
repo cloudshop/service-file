@@ -3,8 +3,8 @@
 #
 # This configuration overrides the application.yml file.
 #
-# More information on profiles: http://www.jhipster.tech/profiles/
-# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
+# More information on profiles: https://jhipster.github.io/profiles/
+# More information on configuration properties: https://jhipster.github.io/common-application-properties/
 # ===================================================================
 
 # ===================================================================
@@ -12,12 +12,6 @@
 # Full reference is available at:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
-
-logging:
-    level:
-        ROOT: DEBUG
-        com.eyun.file: DEBUG
-        io.github.jhipster: DEBUG
 
 eureka:
     instance:
@@ -39,7 +33,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://192.168.1.10:3306/file?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://192.168.1.10:3306/sms?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: z7eh9n6tvk1fPUB8
         hikari:
@@ -61,29 +55,14 @@ spring:
             hibernate.cache.hazelcast.instance_name: file
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
-# REDIS (RedisProperties)
-      # Redis数据库索引（默认为0）
-    redis:
-      # Redis数据库索引（默认为0）
-        database: 0
-      # Redis服务器地址
-        host: 127.0.0.1
-      # Redis服务器连接端口
-        port: 6379
-      # Redis服务器连接密码（默认为空） windows环境下有密码报密码错误
-        password:
-      # 连接池最大连接数（使用负值表示没有限制）
-        pool:
-          max-active: 8
-      # 连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-wait: -1
-      # 连接池中的最大空闲连接
-          max-idle: 8
-      # 连接池中的最小空闲连接
-          min-idle: 0
-      # 连接超时时间（毫秒）
-          #timeout: 0
-
+    data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes:
+            properties:
+                path:
+                    logs: target/elasticsearch/log
+                    data: target/elasticsearch/data
     mail:
         host: 192.168.1.10
         port: 25
@@ -117,16 +96,16 @@ liquibase:
 #    ssl:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
-#        key-store-type: PKCS12
-#        key-alias: file
+#        keyStoreType: PKCS12
+#        keyAlias: file
 # ===================================================================
 server:
-    port: 8114
+    port: 7011
 
 # ===================================================================
 # JHipster specific properties
 #
-# Full reference is available at: http://www.jhipster.tech/common-application-properties/
+# Full reference is available at: https://jhipster.github.io/common-application-properties/
 # ===================================================================
 
 jhipster:
@@ -136,19 +115,14 @@ jhipster:
         hazelcast: # Hazelcast distributed cache
             time-to-live-seconds: 3600
             backup-count: 1
-            management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
-                enabled: false
-                update-interval: 3
-                url: http://192.168.1.10:8180/mancenter
-    # CORS is disabled by default on microservices, as you should access them through a gateway.
-    # If you want to enable it, please uncomment the configuration below.
-    # cors:
-        # allowed-origins: "*"
-        # allowed-methods: "*"
-        # allowed-headers: "*"
-        # exposed-headers: "Authorization,Link,X-Total-Count"
-        # allow-credentials: true
-        # max-age: 1800
+    # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
+    cors:
+        allowed-origins: "*"
+        allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+        allowed-headers: "*"
+        exposed-headers:
+        allow-credentials: true
+        max-age: 1800
     security:
         client-authorization:
             access-token-uri: http://uaa/oauth/token
@@ -157,7 +131,7 @@ jhipster:
             client-secret: internal
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: file@192.168.1.10
-        base-url: http://192.168.1.10:8114
+        base-url: http://192.168.1.10:7011
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite: # Use the "graphite" Maven profile to have the Graphite dependencies
@@ -181,25 +155,13 @@ jhipster:
             enabled: false
             # edit spring.metrics.export.delay-millis to set report frequency
 
-oauth2:
-    signature-verification:
-        public-key-endpoint-uri: http://uaa/oauth/token_key
-        #ttl for public keys to verify JWT tokens (in ms)
-        ttl: 3600000
-        #max. rate at which public keys will be fetched (in ms)
-        public-key-refresh-rate-limit: 10000
-    web-client-configuration:
-        #keep in sync with UAA configuration
-        client-id: web_app
-        secret: changeit
-
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
 # to have type-safe configuration, like in the JHipsterProperties above
 #
 # More documentation is available at:
-# http://www.jhipster.tech/common-application-properties/
+# https://jhipster.github.io/common-application-properties/
 # ===================================================================
 
 application:
@@ -208,5 +170,3 @@ application:
         access_id: LTAIqb9rnlpi7ehS
         access_key: gcM7tjcAKAM5PfpqlRnMeG115PYQOC
         bucket_name: gongrong
-
-

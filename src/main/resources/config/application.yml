@@ -118,7 +118,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: file@localhost
+        from: file@192.168.1.10
     swagger:
         default-include-pattern: /api/.*
         title: file API
@@ -143,3 +143,21 @@ jhipster:
 # ===================================================================
 
 application:
+    file:
+# local：保存在本地
+# oss：保存在阿里云oss
+# cloud：分布式
+        location: oss
+        output: /data/uploads/
+    image:
+        nail:
+            path: nail
+            width: 240
+            height: 160
+        small:
+            path: small
+            width: 480
+            height: 320
+        origin:
+            width: 600
+            height: 400
