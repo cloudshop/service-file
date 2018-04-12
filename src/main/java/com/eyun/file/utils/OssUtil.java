@@ -124,23 +124,23 @@ public class OssUtil {
         logger.info("url::"+url);
         return url.toString();
     }
-    public static void main(String[]args)throws Exception{
-        /****************************初始化OssClient(默认私有读写)****************************************/
+    /*public static void main(String[]args)throws Exception{
+        *//****************************初始化OssClient(默认私有读写)****************************************//*
         String bucket="gongrong";
         String endpoint="http://oss-cn-beijing.aliyuncs.com";
         String access_id="LTAIqb9rnlpi7ehS";
         String access_key="gcM7tjcAKAM5PfpqlRnMeG115PYQOC";
         String key=access_id+access_key;
         OSSClient ossClient = new OSSClient(endpoint,access_id, access_key);
-        //logger.info("ObjectAcl"+ossClient.getObjectAcl(bucket,key));
-        /*********************************获取文件的全部元信息******************************/
-        /*ObjectMetadata metadata = ossClient.getObjectMetadata(bucket, key);
+        logger.info("ObjectAcl"+ossClient.getObjectAcl(bucket,key));
+        *//*********************************获取文件的全部元信息******************************//*
+        *//*ObjectMetadata metadata = ossClient.getObjectMetadata(bucket, key);
         logger.info(metadata.getETag());
         logger.info(metadata.getContentDisposition());
         logger.info(metadata.getRawExpiresValue());
-        logger.info(metadata.getObjectType());*//*
-        /********************************上传文件******************************************/
-        /*File file=new File("C:\\Users\\admin\\Desktop\\1521793336.png");
+        logger.info(metadata.getObjectType());*//**//*
+        /********************************上传文件******************************************//*
+        File file=new File("C:\\Users\\admin\\Desktop\\1521793336.png");
         String fileName=file.getName().substring(file.getName().indexOf("."));
         logger.info("fileName::"+fileName);
         FileInputStream fis = new FileInputStream(file);
@@ -161,8 +161,8 @@ public class OssUtil {
         logger.info("ETag::"+fileId);
         Date expiration = new Date(new Date().getTime() + 3600 * 1000);
         URL url = ossClient.generatePresignedUrl(bucket, "365d6df1f952497580cbbfa120f57a35.png", expiration);
-        logger.info("url::"+url);*/
-       /*******************************获取所有文件*********************************************************/
+        logger.info("url::"+url);
+       *//*******************************获取所有文件*********************************************************//*
         // 构造ListObjectsRequest请求
         ListObjectsRequest listObjectsRequest = new ListObjectsRequest(bucket).withMaxKeys(100);
         ObjectListing objectListing = ossClient.listObjects(new ListObjectsRequest( bucket));
@@ -177,9 +177,9 @@ public class OssUtil {
             }
         }
 
-        /********************************删除文件*********************************************************/
+        *//********************************删除文件*********************************************************//*
         DeleteObjectsResult deleteObjectsResult = ossClient.deleteObjects(new DeleteObjectsRequest(bucket).withKeys(keyList));
         keyList.clear();
         ossClient.shutdown();
-    }
+    }*/
 }
