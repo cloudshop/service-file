@@ -347,7 +347,7 @@ public class FileUploadService {
 		return null;
 	}
 
-	public Map ossFileUpload(MultipartFile file){
+	public Map ossFileUpload(MultipartFile file)throws Exception{
         return ossUtil.ossUpload(file);
     }
 
