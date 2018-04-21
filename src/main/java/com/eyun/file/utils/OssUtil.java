@@ -80,19 +80,16 @@ public class OssUtil {
 
     /*单个文件上传 上传后返回URL
     * */
-    public Map ossUpload(MultipartFile file) throws Exception{
+    public String ossUpload(MultipartFile file) throws Exception{
             // 上传aliyun
             OSSClient ossClient =createOSSClient();
             if (ossClient==null){
                 return null;
             }
-            Map<String,String> resultMap=new HashMap<String,String>();
             String bucketName=getBucketName();
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
             String imageName =file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
             String fileName=uuid+imageName;
-            resultMap.put("fileName",fileName);
-            logger.info("fileName::"+fileName);
             ObjectMetadata meta = new ObjectMetadata();
             meta.setContentLength(file.getSize());
             PutObjectResult result=ossClient.putObject(bucketName, fileName, new ByteArrayInputStream(file.getBytes()),meta);
@@ -104,9 +101,8 @@ public class OssUtil {
             //ossClient.shutdown();
             String key="img_"+uuid;
             redisTemplate.boundValueOps(key).set(url.toString());
-            resultMap.put("url",url.toString());
             logger.info("url::"+url);
-            return resultMap;
+            return url.toString();
     }
 
      /*

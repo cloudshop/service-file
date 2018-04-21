@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,9 +71,9 @@ public class FileResource {
 	*@return fileName URL
 	* */
 	@PostMapping("/ossUpload")
-    public ResponseEntity<Map> ossUpload(@RequestParam("file") MultipartFile file)throws Exception{
-        Map result=fileUploadService.ossFileUpload(file);
-	    return new ResponseEntity<Map>(result, HttpStatus.OK);
+    public ResponseEntity<List<String>> ossUpload(@NotNull @RequestParam("file") MultipartFile[] file)throws Exception{
+        List<String> urlList=fileUploadService.ossFileUpload(file);
+	    return new ResponseEntity<List<String>>(urlList, HttpStatus.OK);
     }
 
     /*

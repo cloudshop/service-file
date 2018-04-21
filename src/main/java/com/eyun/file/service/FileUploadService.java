@@ -21,10 +21,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 //import com.newdun.file.config.OssProperties;
 //import com.newdun.file.utils.OssTools;
@@ -347,8 +344,13 @@ public class FileUploadService {
 		return null;
 	}
 
-	public Map ossFileUpload(MultipartFile file)throws Exception{
-        return ossUtil.ossUpload(file);
+	public List<String> ossFileUpload(MultipartFile[] file)throws Exception{
+	    List<String> list=new ArrayList<>();
+        for (MultipartFile multipartFile:file){
+            String url=ossUtil.ossUpload(multipartFile);
+            list.add(url);
+        }
+        return list;
     }
 
     public String getImgUrl(String fileName){
