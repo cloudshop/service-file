@@ -99,8 +99,8 @@ public class OssUtil {
             Date expirations = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);// url超时时间
             URL url = ossClient.generatePresignedUrl(bucketName, fileName, expirations);
             //ossClient.shutdown();
-            String key="img_"+uuid;
-            redisTemplate.boundValueOps(key).set(url.toString());
+           /* String key="img_"+uuid;
+            redisTemplate.boundValueOps(key).set(url.toString());*/
             logger.info("url::"+url);
             return url.toString();
     }
