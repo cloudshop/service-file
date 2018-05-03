@@ -204,9 +204,9 @@ oauth2:
 
 application:
     oss:
-        endpoint: http://oss-cn-beijing.aliyuncs.com
-        access_id: LTAIqb9rnlpi7ehS
-        access_key: gcM7tjcAKAM5PfpqlRnMeG115PYQOC
-        bucket_name: gongrong
+        endpoint: http://oss-cn-shenzhen.aliyuncs.com
+        access_id: LTAI8XpQglCQ6Qw1
+        access_key: ZdMX78E5CBDMyCu55RguiqxGJkhodf
+        bucket_name: gongrongjifen
 
 
