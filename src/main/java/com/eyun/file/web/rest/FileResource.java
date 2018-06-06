@@ -4,6 +4,7 @@ import com.eyun.file.config.FileProperties;
 import com.eyun.file.service.FileUploadService;
 import com.eyun.file.config.FileProperties;
 import com.eyun.file.service.FileUploadService;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,13 +72,40 @@ public class FileResource {
 	*@param file
 	*@return fileName URL
 	* */
+	@ApiOperation("图片上传")
 	@PostMapping("/ossUpload")
     public ResponseEntity<List<String>> ossUpload(@NotNull @RequestParam("file") MultipartFile[] file)throws Exception{
         List<String> urlList=fileUploadService.ossFileUpload(file);
 	    return new ResponseEntity<List<String>>(urlList, HttpStatus.OK);
     }
 
-    /*
+    /*apk上传
+     *@param file
+     *@return fileName URL
+     * */
+    @ApiOperation("apk上传")
+    @PostMapping("/ossUpload/apk")
+    public ResponseEntity ossUploadApk(@NotNull @RequestParam("file") MultipartFile file)throws Throwable{
+        String result=fileUploadService.ossUploadApk(file);
+        Map<String,String> uploadFile=new HashMap<String,String>();
+        uploadFile.put("url",result);
+        return new ResponseEntity<>(uploadFile, HttpStatus.OK);
+    }
+
+    /*apk下载
+     *@param file
+     *@return fileName URL
+     * */
+/*    @ApiOperation("apk下载")
+    @GetMapping("/ossdownload/apk")
+    public ResponseEntity ossUploadApk(@RequestParam("fileName") String fileName)throws Throwable{
+        String result=fileUploadService.ossDownLoadFile(fileName);
+        Map<String,String> file=new HashMap<String,String>();
+        file.put("etag",result);
+        return new ResponseEntity<>(file, HttpStatus.OK);
+    }*/
+
+   /*
     * 获取图片路径
     * */
     @GetMapping("/view")
@@ -84,4 +113,5 @@ public class FileResource {
         String url=fileUploadService.getImgUrl(fileName);
         return new ResponseEntity<String>(url, HttpStatus.OK);
     }
+
 }

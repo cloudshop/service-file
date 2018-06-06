@@ -272,10 +272,10 @@
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
         <!-- redis begin -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- redis end -->
         <!-- 图像处理 -->
         <dependency>
